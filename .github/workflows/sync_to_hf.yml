@@ -23,8 +23,16 @@ jobs:
           # Clone temporary Hugging Face repo
           git clone https://x-access-token:$HF_TOKEN@huggingface.co/spaces/Sushant8455/Ogm-meeter hf_space
           
-          # Copy only the backend content into the Hugging Face repo root
-          cp -r meeting-bot/backend/* hf_space/
+          # Smart copy: Dhoondho ki backend folder kahan hai aur uski files copy karo
+          TARGET_DIR=$(find . -type d -name "backend" | head -n 1)
+          
+          if [ -z "$TARGET_DIR" ]; then
+            echo "ERROR: 'backend' folder poori repository me kahin nahi mila!"
+            exit 1
+          fi
+          
+          echo "Found backend directory at: $TARGET_DIR"
+          cp -r $TARGET_DIR/* hf_space/
           
           # Move to hf_space, commit and push
           cd hf_space
