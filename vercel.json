@@ -8,14 +8,6 @@
   ],
   "routes": [
     {
-      "src": "/docs",
-      "dest": "meeting-bot/backend/main.py"
-    },
-    {
-      "src": "/openapi.json",
-      "dest": "meeting-bot/backend/main.py"
-    },
-    {
       "src": "/(.*)",
       "dest": "meeting-bot/backend/main.py"
     }
