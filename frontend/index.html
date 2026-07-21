@@ -614,7 +614,7 @@
 (function () {
   "use strict";
 
- var API_BASE = "https://meeting-bot-1h2m.onrender.com";
+  var API_BASE = "https://meeting-bot-1h2m.onrender.com";
   var recordBtn = document.getElementById("recordBtn");
   var recordBtnShell = document.getElementById("recordBtnShell");
   var recordIcon = document.getElementById("recordIcon");
@@ -703,8 +703,6 @@
     });
   }
 
-  // Long recordings mean hundreds of chunk uploads over spotty wifi/mobile data —
-  // a transient network blip shouldn't silently lose 12 seconds of the meeting.
   function uploadChunk(blob) {
     if (!blob || blob.size === 0) return Promise.resolve();
     var ts = Date.now();
@@ -778,9 +776,6 @@
     recordBtnShell.classList.toggle("is-recording", recording);
   }
 
-  // Best-effort: keep the screen from sleeping mid-recording on long meetings.
-  // Not supported everywhere (notably Safari) — fails silently where unavailable,
-  // and the browser auto-releases it whenever the tab is hidden anyway.
   var wakeLock = null;
 
   async function acquireWakeLock() {
